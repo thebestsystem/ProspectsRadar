@@ -12,17 +12,16 @@ TEST_USER_ID = "u-test"
 
 
 @pytest.fixture
-async def client():
+def client():
     """Unauthenticated client. Routes guarded by get_current_user return 401;
     the auth/billing/generation/admin suites set their own identity by
     monkeypatching auth_service.user_from_token and sending a bearer header."""
     transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as ac:
-        yield ac
+    return AsyncClient(transport=transport, base_url="http://test")
 
 
 @pytest.fixture
-async def auth_client():
+def auth_client():
     """Client authenticated as a fixed test user via a dependency override, so
     protected file routes resolve to a real caller id without a live Supabase.
     The override is scoped to the fixture and torn down after each test."""
@@ -31,8 +30,7 @@ async def auth_client():
     )
     transport = ASGITransport(app=app)
     try:
-        async with AsyncClient(transport=transport, base_url="http://test") as ac:
-            yield ac
+        yield AsyncClient(transport=transport, base_url="http://test")
     finally:
         app.dependency_overrides.pop(get_current_user, None)
 
@@ -75,20 +73,25 @@ def reset_shared_module_state():
 
 
 @pytest.fixture(autouse=True)
-async def reset_shared_http_client():
-    """Close the shared Supabase httpx client before and after each test.
-
-    The pooled client (`repo/http_client.py`) binds its connection pool to the
-    event loop it first issues a request on; pytest-asyncio gives each async
-    test its own loop, so without this a client created in one test would be
-    reused on the next test's loop and raise. Suite-wide (not just the
-    http_client tests) so any future test that drives a real repo path is safe.
-    """
+def reset_shared_http_client():
+    """Close the shared Supabase httpx client before and after each test."""
     from app.repo import http_client
 
-    await http_client.close_client()
+    def _close():
+        if http_client._client is not None and not http_client._client.is_closed:
+            import asyncio
+
+            try:
+                loop = asyncio.get_event_loop()
+                if not loop.is_closed() and not loop.is_running():
+                    loop.run_until_complete(http_client.close_client())
+            except Exception:
+                pass
+            http_client._client = None
+
+    _close()
     yield
-    await http_client.close_client()
+    _close()
 
 
 @pytest.fixture(autouse=True)

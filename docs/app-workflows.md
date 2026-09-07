@@ -1,61 +1,68 @@
-<!-- last_verified: 2026-07-16 -->
-# App Workflows
+<!-- last_verified: 2026-09-07 -->
+# App Workflows - ProspectsRadar
 
-User journeys inside the application.
+Parcours utilisateurs et flux de travail clés dans **ProspectsRadar**.
 
-## Sign Up & Sign In
+---
 
-- New user navigates to `/signup`, enters name/email/password
-- Supabase sends a confirmation email (locally, caught by Mailpit at `:54324`)
-- User clicks the link → `/auth/confirm` verifies it and establishes the session → lands in the app
-- Returning user signs in at `/signin` with password **or** an emailed 6-digit code
-- Unauthenticated visits to any protected route redirect to `/signin?next=<path>`
-- `/account` shows the profile (editable name), an admin-only Admin badge, a Connection check, and Sign out
-- Signups get the default `user` role; grant admin explicitly via SQL (`update public.profiles set role='admin' where email='…'`)
-- See: [Authentication](features/authentication.md)
+## 1. Pipeline de Prospection & Dashboard Agence
 
-## Subscribe & Manage Billing
+Le tableau de bord principal (`/`) est la console centrale de l'agence pour prospecter les e-commerçants invisibles aux moteurs IA :
 
-- User navigates to `/billing`, sees Free / Pro / Team plan cards and their current plan
-- Clicking **Upgrade** starts a Stripe Checkout Session and redirects to Stripe
-- Paying with the test card `4242 4242 4242 4242` returns to `/billing?checkout=success`
-- Stripe's webhook syncs the subscription into Supabase; the plan badge updates to the new tier
-- Pro-only surfaces (e.g. AI media generation) unlock once the tier is Pro or higher
-- **Manage billing** opens the Stripe Billing Portal to change or cancel the plan
-- A Free user sees the Pro feature preview card in a locked state
-- See: [Billing](features/billing.md)
+1. **Consultation des KPIs globaux** :
+   - Volume total de leads pré-qualifiés.
+   - Taux de douleur critique (boutiques avec un score IA < 40/100).
+   - Score moyen de visibilité IA sur le marché cible.
+   - Top 5 des failles techniques les plus fréquentes (Schema.org incomplet, blocage `GPTBot`, absence de `llms.txt`).
 
-## Upload Files
+2. **Filtrage par Vertical** :
+   - L'utilisateur filtre par secteur : *Shopify France*, *Mode & Beauté*, *Maison & Déco*, etc.
+   - La liste se met à jour instantanément via TanStack Query (`useLeads`).
 
-- User navigates to `/upload`
-- Drops or selects files in the dropzone
-- Client validates file size (max 100MB) and type
-- Client gets a presigned URL from the API, then uploads the bytes **directly to B2** (they never pass through the API) and confirms
-- Progress bar shows per-file upload status (tracking the direct-to-B2 transfer)
-- On success: toast notification, green checkmark
-- On failure: red status icon with error message
-- User can clear completed uploads
-- See: [File Upload](features/file-upload.md)
+3. **Consultation d'un Lead & Pitch Commercial** :
+   - L'agence clique sur **"Voir le pitch"** sur une ligne de prospect.
+   - Une modale s'ouvre avec :
+     - Le score global et la ventilation par pilier.
+     - Les coordonnées du décideur identifié (Nom, Poste, Email vérifié, Profil LinkedIn).
+     - L'angle de prospection pré-rédigé citant exactement les failles de la boutique.
+     - Un bouton **"Copier le pitch"** en 1 clic.
 
-## Browse and Manage Files
+4. **Exportation des Leads vers un Outil Cold Mail** :
+   - L'utilisateur clique sur **"Exporter CSV"**.
+   - L'API génère un CSV pré-formaté compatible avec *Instantly*, *Smartlead*, *Lemlist* ou un CRM (*HubSpot*).
 
-- User navigates to `/files`
-- Page loads file list from API (sorted most recent first)
-- Files displayed in tree view with folders and type-specific icons
-- Top-level folders auto-expand on load
-- Hover a file row to see action buttons (preview / download / delete)
-- **Preview**: opens dialog with image/PDF preview
-- **Download**: fetches presigned URL, browser downloads file
-- **Delete**: removes file from B2, row removed from tree, toast confirms
-- Empty bucket shows "No files found" with upload prompt
-- See: [File Browser](features/file-browser.md)
+5. **Téléchargement du Rapport d'Audit PDF** :
+   - L'utilisateur clique sur l'icône **PDF** d'un lead.
+   - Un rapport d'audit vectoriel complet en marque blanche est généré à la volée par ReportLab.
 
-## View Dashboard
+---
 
-- User navigates to `/` (home)
-- Parallel API calls load: subscription, file stats, generation jobs, upload activity
-- KPI cards show: plan + status, storage used, successful generations, failed generations
-- Upload chart shows last 7 days of upload activity as a bar chart
-- Recent generations table shows the latest generation jobs
-- Empty states guide the user to generate or upload
-- See: [Dashboard](features/dashboard.md)
+## 2. Audit Instantané en Direct (Scanner URL)
+
+1. L'agence souhaite tester une boutique spécifique qui ne figure pas encore dans la liste.
+2. L'utilisateur saisit l'URL dans la section **Scanner en direct** et valide.
+3. Le backend exécute :
+   - L'analyse des directives de crawl (`robots.txt`, bots IA).
+   - L'extraction et la validation du JSON-LD Schema.org (`Product`, `Offer`, `shippingDetails`).
+   - Le ratio bruit DOM / pureté sémantique.
+   - La simulation d'achat agentique (extraction sans JS).
+   - La vérification de `/llms.txt`.
+4. Le résultat s'affiche en temps réel avec le score /100, les éléments cassés et les correctifs techniques préconisés.
+
+---
+
+## 3. Authentification & Gestion de Compte
+
+1. Inscription sur `/signup` (email/mot de passe ou lien magique OTP).
+2. Confirmation par email (interceptée localement par Mailpit à `:54324`).
+3. Connexion sur `/signin`.
+4. Gestion du profil sur `/account`.
+
+---
+
+## 4. Abonnements & Facturation Stripe
+
+1. L'agence accède à `/billing` pour consulter les forfaits (Starter, Pro, Agence Illimitée).
+2. Le bouton **Passer à l'offre supérieure** redirige vers Stripe Checkout.
+3. Les webhooks Stripe mettent à jour automatiquement le statut dans Supabase.
+4. Le portail de facturation Stripe permet de gérer ou résilier l'abonnement à tout moment.

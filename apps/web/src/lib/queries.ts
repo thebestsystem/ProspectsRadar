@@ -31,6 +31,10 @@ import {
   getSubscription,
   getUploadActivity,
   setUserRole,
+  getLeads,
+  getLeadsStats,
+  scanTargetUrl,
+  launchBatchScan,
   type Me,
 } from "@/lib/api-client";
 import type {
@@ -45,6 +49,10 @@ import type {
   Plan,
   Role,
   Subscription,
+  AuditResult,
+  BatchScanJob,
+  LeadsStats,
+  ProspectLead,
 } from "@ai-saas-starter-kit/shared";
 
 // Single source of truth for query keys. Keep these tightly scoped so that
@@ -64,6 +72,8 @@ export const qk = {
   entitlements: () => [...qk.all, "entitlements"] as const,
   proPreview: () => [...qk.all, "proPreview"] as const,
   generationJobs: () => [...qk.all, "generationJobs"] as const,
+  leads: (vertical?: string) => ["leads", vertical ?? "all"] as const,
+  leadsStats: () => ["leads", "stats"] as const,
   admin: {
     overview: () => [...qk.all, "admin", "overview"] as const,
     users: () => [...qk.all, "admin", "users"] as const,
@@ -320,6 +330,44 @@ export function useSetUserRole() {
       qc.invalidateQueries({ queryKey: qk.admin.users() });
       qc.invalidateQueries({ queryKey: qk.admin.audit() });
       qc.invalidateQueries({ queryKey: qk.admin.overview() });
+    },
+  });
+}
+
+// --- ProspectsRadar: Leads and Scanner Hooks -------------------------------
+
+export function useLeads(vertical = "all") {
+  return useQuery<ProspectLead[], ApiError>({
+    queryKey: qk.leads(vertical),
+    queryFn: () => getLeads(vertical),
+    staleTime: 10_000,
+  });
+}
+
+export function useLeadsStats() {
+  return useQuery<LeadsStats, ApiError>({
+    queryKey: qk.leadsStats(),
+    queryFn: getLeadsStats,
+    staleTime: 10_000,
+  });
+}
+
+export function useScanTarget() {
+  const qc = useQueryClient();
+  return useMutation<AuditResult, ApiError, { url: string }>({
+    mutationFn: ({ url }) => scanTargetUrl(url),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["leads"] });
+    },
+  });
+}
+
+export function useLaunchBatchScan() {
+  const qc = useQueryClient();
+  return useMutation<BatchScanJob, ApiError, { vertical: string; domains?: string[] }>({
+    mutationFn: ({ vertical, domains }) => launchBatchScan(vertical, domains),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["leads"] });
     },
   });
 }

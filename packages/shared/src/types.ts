@@ -182,3 +182,78 @@ export interface AdminAuditEvent {
   detail: Record<string, unknown>;
   created_at: string | null;
 }
+
+// --- ProspectsRadar: AI Visibility Leads & Scanner -------------------------
+
+export interface BrokenItem {
+  title: string;
+  impact: string;
+  severity: string;
+}
+
+export interface DecisionMaker {
+  name: string;
+  title: string;
+  email: string;
+  linkedin_url?: string | null;
+  enrichment_source: string;
+}
+
+export interface ProspectLead {
+  id: string;
+  domain: string;
+  company_name: string;
+  vertical: string;
+  score: number;
+  pain_level: "critical" | "moderate" | "low";
+  status: "new" | "contacted" | "interested" | "converted" | "archived";
+  failing_pillars: string[];
+  broken_items: BrokenItem[];
+  decision_maker: DecisionMaker;
+  pitch_email: string;
+  audit_summary?: string;
+  created_at: string;
+}
+
+export interface PillarScore {
+  score: number;
+  max: number;
+  weight: string;
+  status: string;
+  label: string;
+  details: string[];
+}
+
+export interface AuditResult {
+  domain: string;
+  name: string;
+  image?: string | null;
+  score: number;
+  status: string;
+  statusLabel: string;
+  statusBadgeClass: string;
+  summary: string;
+  pillars: Record<string, PillarScore>;
+  brokenItems: BrokenItem[];
+  autoFix?: Record<string, string>;
+  isWafBlocked: boolean;
+}
+
+export interface LeadsStats {
+  total_leads: number;
+  critical_pain_count: number;
+  critical_pain_rate: number;
+  average_score: number;
+  top_failing_pillars: Record<string, number>;
+}
+
+export interface BatchScanJob {
+  job_id: string;
+  vertical: string;
+  total_domains: number;
+  scanned_count: number;
+  qualified_count: number;
+  status: string;
+  leads: ProspectLead[];
+  created_at: string;
+}

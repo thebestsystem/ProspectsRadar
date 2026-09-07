@@ -4,14 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   type LucideIcon,
-  LayoutDashboard,
+  Radar,
   Upload,
   FolderOpen,
   Settings,
   Sparkles,
   UserRound,
   CreditCard,
-  Wand2,
   ShieldCheck,
   LogOut,
 } from "lucide-react";
@@ -33,12 +32,8 @@ import { useAuth } from "@/components/auth/auth-provider";
 type NavItem = { title: string; href: string; icon: LucideIcon };
 type NavGroupDef = { label: string; items: NavItem[] };
 
-// Grouped nav. Product features lead; the Storage group deliberately surfaces the
-// B2-backed Upload/Files pages (this is a storage-first starter, so the bucket is
-// named, not hidden); account/settings and the Design System reference come last.
 const productItems: NavItem[] = [
-  { title: "Dashboard", href: "/", icon: LayoutDashboard },
-  { title: "Generate", href: "/generate", icon: Wand2 },
+  { title: "Pipeline Leads", href: "/", icon: Radar },
   { title: "Billing", href: "/billing", icon: CreditCard },
 ];
 
@@ -123,8 +118,8 @@ export function AppSidebar() {
           href="/"
           className="flex items-center gap-2.5 font-semibold text-[15px] tracking-tight"
         >
-          <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-foreground text-background font-display font-bold text-[13px]">
-            B2
+          <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-primary text-primary-foreground font-display font-bold text-[12px] shadow-sm">
+            PR
           </div>
           <span>{APP_NAME}</span>
         </Link>
@@ -162,15 +157,10 @@ export function AppSidebar() {
             </button>
           </div>
         )}
-        <a
-          href="https://www.backblaze.com/cloud-storage?utm_source=github&utm_medium=referral&utm_campaign=ai_artifacts&utm_content=b2ai-ai-saas-starter-kit"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--brand-b2)]" />
-          Built on Backblaze B2
-        </a>
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          Moteur AEO / LLM actif
+        </div>
       </SidebarFooter>
     </Sidebar>
   );

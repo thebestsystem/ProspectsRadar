@@ -14,6 +14,10 @@ import type {
   Role,
   Subscription,
   UploadStats,
+  AuditResult,
+  BatchScanJob,
+  LeadsStats,
+  ProspectLead,
 } from "@ai-saas-starter-kit/shared";
 import { createClient } from "./supabase/client";
 
@@ -335,4 +339,44 @@ export async function setUserRole(userId: string, role: Role) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ role }),
   });
+}
+
+// --- ProspectsRadar API ----------------------------------------------------
+
+/** Retrieve pre-qualified leads with failing pillars and customized pitch. */
+export async function getLeads(vertical = "all") {
+  return apiFetch<ProspectLead[]>(`/leads?vertical=${encodeURIComponent(vertical)}`);
+}
+
+/** Aggregate dashboard metrics for qualified leads and critical pain rates. */
+export async function getLeadsStats() {
+  return apiFetch<LeadsStats>("/leads/stats");
+}
+
+/** Execute instant 5-pillar audit on any target e-commerce domain. */
+export async function scanTargetUrl(url: string) {
+  return apiFetch<AuditResult>("/scan", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url }),
+  });
+}
+
+/** Launch a batch scan across a vertical or custom domain list. */
+export async function launchBatchScan(vertical: string, domains?: string[]) {
+  return apiFetch<BatchScanJob>("/leads/batch", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ vertical, domains: domains || [], max_leads: 50 }),
+  });
+}
+
+/** URL to download the audit PDF for a specific prospect lead. */
+export function getLeadPdfUrl(leadId: string): string {
+  return `${API_BASE}/leads/${encodeURIComponent(leadId)}/pdf`;
+}
+
+/** URL to export pre-qualified leads as formatted CSV for Instantly/HubSpot. */
+export function getLeadsExportUrl(vertical = "all"): string {
+  return `${API_BASE}/leads/export.csv?vertical=${encodeURIComponent(vertical)}`;
 }

@@ -1,37 +1,34 @@
-<!-- last_verified: 2026-07-14 -->
-# Feature: Dashboard
+<!-- last_verified: 2026-09-07 -->
+# Feature: ProspectsRadar Agency Dashboard
 
 ## Purpose
-Give a signed-in user an at-a-glance view of their SaaS state: current plan +
-status, storage used, AI generations produced, failed jobs, and recent activity.
+Provide e-commerce and SEO agencies with an actionable pipeline of pre-qualified leads based on AI visibility scores (0-100), accompanied by identified pain points, enriched decision-maker contacts, pre-written cold emails, and audit PDF downloads.
 
 ## Used By
-- UI: `/` page (dashboard home)
-- API: `GET /billing/subscription`, `GET /files/stats`,
-  `GET /files/stats/activity`, `GET /generation/jobs`
+- UI: `/` page (ProspectsRadar agency pipeline & live audit demo)
+- API: `GET /leads`, `GET /leads/stats`, `POST /scan`, `POST /leads/batch`, `GET /leads/export.csv`, `GET /leads/{id}/pdf`
 
 ## Core Functions
-- `apps/web/src/components/dashboard/saas-stats-cards.tsx` — 4 KPI cards (plan,
-  storage, generations, failed generations), composed from existing query hooks
-- `apps/web/src/components/dashboard/recent-generations-table.tsx` — last ~6 jobs
-- `apps/web/src/components/dashboard/upload-chart.tsx` — storage activity chart
-- `apps/web/src/components/status-badge.tsx` — shared status pill (job/sub/run)
-- `apps/web/src/lib/queries.ts` — `useSubscription`, `useFileStats`,
-  `useUploadActivity`, `useGenerationJobs`
+- `apps/web/src/components/dashboard/radar-stats-cards.tsx` — 4 KPI cards (qualified leads count, critical pain rate < 40, average market score, top failing pillar)
+- `apps/web/src/components/dashboard/prospects-table.tsx` — Interactive leads table with vertical filtering, pain badges, decision maker coordinates, modal cold pitch preview (1-click copy), and CSV/PDF export actions
+- `apps/web/src/components/dashboard/live-scan-card.tsx` — Live 5-pillar instant auditor for prospect URLs with detailed breakdown
+- `apps/web/src/lib/queries.ts` — `useLeads`, `useLeadsStats`, `useScanTarget`, `useLaunchBatchScan`
 
 ## Canonical Files
-- Dashboard KPI pattern: `apps/web/src/components/dashboard/saas-stats-cards.tsx`
-- Recent-activity table pattern: `apps/web/src/components/dashboard/recent-generations-table.tsx`
+- Dashboard KPI pattern: `apps/web/src/components/dashboard/radar-stats-cards.tsx`
+- Qualified prospects pipeline: `apps/web/src/components/dashboard/prospects-table.tsx`
+- Live audit simulation: `apps/web/src/components/dashboard/live-scan-card.tsx`
 
 ## Inputs
-- None (dashboard loads data automatically for the signed-in user)
+- Vertical filter selection (`all`, `shopify_fr`, `mode_beaute`, `maison_deco`)
+- Target URL for live instant scan (`POST /scan`)
 
 ## Outputs
-- `GET /billing/subscription` → `Subscription` (plan_id + status card)
-- `GET /files/stats` → `UploadStats` (storage-used card)
-- `GET /generation/jobs` → `GenerationJob[]` (generations count, failed count,
-  recent-generations table — no dashboard-specific endpoint needed)
-- `GET /files/stats/activity?days=7` → `DailyUploadCount[]` (activity chart)
+- `GET /leads` → `ProspectLead[]` (filtered leads list)
+- `GET /leads/stats` → `LeadsStats` (KPI aggregations)
+- `POST /scan` → `AuditResult` (instant 5-pillar assessment)
+- `GET /leads/export.csv` → Formatted CSV file for Instantly/Smartlead/HubSpot
+- `GET /leads/{id}/pdf` → ReportLab white-label audit report PDF
 
 ## Flow
 - Page loads → parallel query hooks (subscription, file stats, generation jobs,

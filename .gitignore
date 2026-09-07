@@ -53,3 +53,4 @@ services/api/data/
 
 # Local-only working area (machine/user-specific)
 .local/
+_legacy_prototype/

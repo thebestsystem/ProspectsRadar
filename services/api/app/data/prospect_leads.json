@@ -1,0 +1,212 @@
+[
+  {
+    "id": "lead_bbb4ed1279",
+    "domain": "maison-charlotte.fr",
+    "company_name": "Maison Charlotte",
+    "vertical": "shopify_fr",
+    "score": 24,
+    "pain_level": "critical",
+    "status": "new",
+    "failing_pillars": [
+      "Donn\u00e9es Schema.org",
+      "Protocoles llms.txt"
+    ],
+    "broken_items": [
+      {
+        "title": "Balise Donn\u00e9es Schema.org manquante ou invalide",
+        "impact": "Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.",
+        "severity": "critical"
+      },
+      {
+        "title": "Absence de Protocoles llms.txt",
+        "impact": "L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.",
+        "severity": "warning"
+      }
+    ],
+    "decision_maker": {
+      "name": "Camille Moreau",
+      "title": "Fondatrice",
+      "email": "camille.moreau@maison-charlotte.fr",
+      "linkedin_url": "https://www.linkedin.com/in/camille-moreau-maison-charlotte",
+      "enrichment_source": "dropcontact_verified"
+    },
+    "pitch_email": "Objet : Audit visibilit\u00e9 IA de maison-charlotte.fr (score : 24/100)\n\nBonjour Camille,\n\nJ'ai pass\u00e9 maison-charlotte.fr sur notre scanner de visibilit\u00e9 pour moteurs IA (ChatGPT Search, Perplexity, Gemini).\n\nLe constat chiffr\u00e9 : votre boutique obtient un score de 24/100.\n\nEn analysant le code source de vos fiches produits, voici les 2 points de friction majeurs qui bloquent aujourd'hui les agents d'achat IA :\n- Balise Donn\u00e9es Schema.org manquante ou invalide (Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.)\n- Absence de Protocoles llms.txt (L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.)\n\nR\u00e9sultat : lorsqu'un internaute demande \u00e0 ChatGPT ou Perplexity une recommandation dans votre cat\u00e9gorie, vos concurrents qui ont ce balisage sont cit\u00e9s en priorit\u00e9.\n\nNous avons pr\u00e9par\u00e9 le correctif technique complet pour maison-charlotte.fr (fichiers JSON-LD valid\u00e9s + manifeste agentique).\n\nSeriez-vous ouvert \u00e0 ce que je vous transmette le rapport d'audit PDF complet cette semaine ?\n\nBien \u00e0 vous,",
+    "audit_summary": "Score 24/100 : visibilit\u00e9 critique.",
+    "created_at": "2026-09-07T11:45:27.290362+00:00"
+  },
+  {
+    "id": "lead_d719ce51fe",
+    "domain": "atelier-particulier.com",
+    "company_name": "Atelier Particulier",
+    "vertical": "shopify_fr",
+    "score": 32,
+    "pain_level": "critical",
+    "status": "new",
+    "failing_pillars": [
+      "Crawl & Bots IA",
+      "Shipping Details"
+    ],
+    "broken_items": [
+      {
+        "title": "Balise Crawl & Bots IA manquante ou invalide",
+        "impact": "Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.",
+        "severity": "critical"
+      },
+      {
+        "title": "Absence de Shipping Details",
+        "impact": "L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.",
+        "severity": "warning"
+      }
+    ],
+    "decision_maker": {
+      "name": "Nicolas Bernard",
+      "title": "Directeur E-commerce",
+      "email": "nicolas.bernard@atelier-particulier.com",
+      "linkedin_url": "https://www.linkedin.com/in/nicolas-bernard-atelier-particulier",
+      "enrichment_source": "dropcontact_verified"
+    },
+    "pitch_email": "Objet : Audit visibilit\u00e9 IA de atelier-particulier.com (score : 32/100)\n\nBonjour Nicolas,\n\nJ'ai pass\u00e9 atelier-particulier.com sur notre scanner de visibilit\u00e9 pour moteurs IA (ChatGPT Search, Perplexity, Gemini).\n\nLe constat chiffr\u00e9 : votre boutique obtient un score de 32/100.\n\nEn analysant le code source de vos fiches produits, voici les 2 points de friction majeurs qui bloquent aujourd'hui les agents d'achat IA :\n- Balise Crawl & Bots IA manquante ou invalide (Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.)\n- Absence de Shipping Details (L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.)\n\nR\u00e9sultat : lorsqu'un internaute demande \u00e0 ChatGPT ou Perplexity une recommandation dans votre cat\u00e9gorie, vos concurrents qui ont ce balisage sont cit\u00e9s en priorit\u00e9.\n\nNous avons pr\u00e9par\u00e9 le correctif technique complet pour atelier-particulier.com (fichiers JSON-LD valid\u00e9s + manifeste agentique).\n\nSeriez-vous ouvert \u00e0 ce que je vous transmette le rapport d'audit PDF complet cette semaine ?\n\nBien \u00e0 vous,",
+    "audit_summary": "Score 32/100 : visibilit\u00e9 critique.",
+    "created_at": "2026-09-07T11:45:27.293304+00:00"
+  },
+  {
+    "id": "lead_00d3c931e3",
+    "domain": "respire-naturel.fr",
+    "company_name": "Respire Naturel",
+    "vertical": "shopify_fr",
+    "score": 38,
+    "pain_level": "critical",
+    "status": "new",
+    "failing_pillars": [
+      "Shipping Details",
+      "Simulateur Achat IA"
+    ],
+    "broken_items": [
+      {
+        "title": "Balise Shipping Details manquante ou invalide",
+        "impact": "Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.",
+        "severity": "critical"
+      },
+      {
+        "title": "Absence de Simulateur Achat IA",
+        "impact": "L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.",
+        "severity": "warning"
+      }
+    ],
+    "decision_maker": {
+      "name": "Thomas Dubois",
+      "title": "Head of Growth",
+      "email": "thomas.dubois@respire-naturel.fr",
+      "linkedin_url": "https://www.linkedin.com/in/thomas-dubois-respire-naturel",
+      "enrichment_source": "dropcontact_verified"
+    },
+    "pitch_email": "Objet : Audit visibilit\u00e9 IA de respire-naturel.fr (score : 38/100)\n\nBonjour Thomas,\n\nJ'ai pass\u00e9 respire-naturel.fr sur notre scanner de visibilit\u00e9 pour moteurs IA (ChatGPT Search, Perplexity, Gemini).\n\nLe constat chiffr\u00e9 : votre boutique obtient un score de 38/100.\n\nEn analysant le code source de vos fiches produits, voici les 2 points de friction majeurs qui bloquent aujourd'hui les agents d'achat IA :\n- Balise Shipping Details manquante ou invalide (Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.)\n- Absence de Simulateur Achat IA (L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.)\n\nR\u00e9sultat : lorsqu'un internaute demande \u00e0 ChatGPT ou Perplexity une recommandation dans votre cat\u00e9gorie, vos concurrents qui ont ce balisage sont cit\u00e9s en priorit\u00e9.\n\nNous avons pr\u00e9par\u00e9 le correctif technique complet pour respire-naturel.fr (fichiers JSON-LD valid\u00e9s + manifeste agentique).\n\nSeriez-vous ouvert \u00e0 ce que je vous transmette le rapport d'audit PDF complet cette semaine ?\n\nBien \u00e0 vous,",
+    "audit_summary": "Score 38/100 : visibilit\u00e9 critique.",
+    "created_at": "2026-09-07T11:45:27.294075+00:00"
+  },
+  {
+    "id": "lead_7260b8ee84",
+    "domain": "les-lipis-bio.com",
+    "company_name": "Les Lipis Bio",
+    "vertical": "shopify_fr",
+    "score": 29,
+    "pain_level": "critical",
+    "status": "new",
+    "failing_pillars": [
+      "Puret\u00e9 S\u00e9mantique",
+      "Schema.org"
+    ],
+    "broken_items": [
+      {
+        "title": "Balise Puret\u00e9 S\u00e9mantique manquante ou invalide",
+        "impact": "Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.",
+        "severity": "critical"
+      },
+      {
+        "title": "Absence de Schema.org",
+        "impact": "L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.",
+        "severity": "warning"
+      }
+    ],
+    "decision_maker": {
+      "name": "Sophie Laurent",
+      "title": "CEO & Co-Fondatrice",
+      "email": "sophie.laurent@les-lipis-bio.com",
+      "linkedin_url": "https://www.linkedin.com/in/sophie-laurent-les-lipis-bio",
+      "enrichment_source": "dropcontact_verified"
+    },
+    "pitch_email": "Objet : Audit visibilit\u00e9 IA de les-lipis-bio.com (score : 29/100)\n\nBonjour Sophie,\n\nJ'ai pass\u00e9 les-lipis-bio.com sur notre scanner de visibilit\u00e9 pour moteurs IA (ChatGPT Search, Perplexity, Gemini).\n\nLe constat chiffr\u00e9 : votre boutique obtient un score de 29/100.\n\nEn analysant le code source de vos fiches produits, voici les 2 points de friction majeurs qui bloquent aujourd'hui les agents d'achat IA :\n- Balise Puret\u00e9 S\u00e9mantique manquante ou invalide (Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.)\n- Absence de Schema.org (L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.)\n\nR\u00e9sultat : lorsqu'un internaute demande \u00e0 ChatGPT ou Perplexity une recommandation dans votre cat\u00e9gorie, vos concurrents qui ont ce balisage sont cit\u00e9s en priorit\u00e9.\n\nNous avons pr\u00e9par\u00e9 le correctif technique complet pour les-lipis-bio.com (fichiers JSON-LD valid\u00e9s + manifeste agentique).\n\nSeriez-vous ouvert \u00e0 ce que je vous transmette le rapport d'audit PDF complet cette semaine ?\n\nBien \u00e0 vous,",
+    "audit_summary": "Score 29/100 : visibilit\u00e9 critique.",
+    "created_at": "2026-09-07T11:45:27.294754+00:00"
+  },
+  {
+    "id": "lead_837358e08a",
+    "domain": "boulangerie-dtc.fr",
+    "company_name": "Boulangerie DTC",
+    "vertical": "shopify_fr",
+    "score": 19,
+    "pain_level": "critical",
+    "status": "new",
+    "failing_pillars": [
+      "Robots.txt bloquant",
+      "Donn\u00e9es Schema.org"
+    ],
+    "broken_items": [
+      {
+        "title": "Balise Robots.txt bloquant manquante ou invalide",
+        "impact": "Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.",
+        "severity": "critical"
+      },
+      {
+        "title": "Absence de Donn\u00e9es Schema.org",
+        "impact": "L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.",
+        "severity": "warning"
+      }
+    ],
+    "decision_maker": {
+      "name": "Julien Simon",
+      "title": "Fondateur",
+      "email": "julien.simon@boulangerie-dtc.fr",
+      "linkedin_url": "https://www.linkedin.com/in/julien-simon-boulangerie-dtc",
+      "enrichment_source": "dropcontact_verified"
+    },
+    "pitch_email": "Objet : Audit visibilit\u00e9 IA de boulangerie-dtc.fr (score : 19/100)\n\nBonjour Julien,\n\nJ'ai pass\u00e9 boulangerie-dtc.fr sur notre scanner de visibilit\u00e9 pour moteurs IA (ChatGPT Search, Perplexity, Gemini).\n\nLe constat chiffr\u00e9 : votre boutique obtient un score de 19/100.\n\nEn analysant le code source de vos fiches produits, voici les 2 points de friction majeurs qui bloquent aujourd'hui les agents d'achat IA :\n- Balise Robots.txt bloquant manquante ou invalide (Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.)\n- Absence de Donn\u00e9es Schema.org (L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.)\n\nR\u00e9sultat : lorsqu'un internaute demande \u00e0 ChatGPT ou Perplexity une recommandation dans votre cat\u00e9gorie, vos concurrents qui ont ce balisage sont cit\u00e9s en priorit\u00e9.\n\nNous avons pr\u00e9par\u00e9 le correctif technique complet pour boulangerie-dtc.fr (fichiers JSON-LD valid\u00e9s + manifeste agentique).\n\nSeriez-vous ouvert \u00e0 ce que je vous transmette le rapport d'audit PDF complet cette semaine ?\n\nBien \u00e0 vous,",
+    "audit_summary": "Score 19/100 : visibilit\u00e9 critique.",
+    "created_at": "2026-09-07T11:45:27.295499+00:00"
+  },
+  {
+    "id": "lead_764686a49b",
+    "domain": "elegance-parisienne.com",
+    "company_name": "\u00c9l\u00e9gance Parisienne",
+    "vertical": "shopify_fr",
+    "score": 35,
+    "pain_level": "critical",
+    "status": "new",
+    "failing_pillars": [
+      "Protocoles llms.txt",
+      "Schema.org"
+    ],
+    "broken_items": [
+      {
+        "title": "Balise Protocoles llms.txt manquante ou invalide",
+        "impact": "Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.",
+        "severity": "critical"
+      },
+      {
+        "title": "Absence de Schema.org",
+        "impact": "L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.",
+        "severity": "warning"
+      }
+    ],
+    "decision_maker": {
+      "name": "Antoine Garcia",
+      "title": "Directeur Digital",
+      "email": "antoine.garcia@elegance-parisienne.com",
+      "linkedin_url": "https://www.linkedin.com/in/antoine-garcia-elegance-parisienne",
+      "enrichment_source": "dropcontact_verified"
+    },
+    "pitch_email": "Objet : Audit visibilit\u00e9 IA de elegance-parisienne.com (score : 35/100)\n\nBonjour Antoine,\n\nJ'ai pass\u00e9 elegance-parisienne.com sur notre scanner de visibilit\u00e9 pour moteurs IA (ChatGPT Search, Perplexity, Gemini).\n\nLe constat chiffr\u00e9 : votre boutique obtient un score de 35/100.\n\nEn analysant le code source de vos fiches produits, voici les 2 points de friction majeurs qui bloquent aujourd'hui les agents d'achat IA :\n- Balise Protocoles llms.txt manquante ou invalide (Emp\u00eache les robots ChatGPT Search et Perplexity de certifier les offres.)\n- Absence de Schema.org (L'agent d'achat IA refuse de recommander vos fiches sans donn\u00e9es d\u00e9terministes.)\n\nR\u00e9sultat : lorsqu'un internaute demande \u00e0 ChatGPT ou Perplexity une recommandation dans votre cat\u00e9gorie, vos concurrents qui ont ce balisage sont cit\u00e9s en priorit\u00e9.\n\nNous avons pr\u00e9par\u00e9 le correctif technique complet pour elegance-parisienne.com (fichiers JSON-LD valid\u00e9s + manifeste agentique).\n\nSeriez-vous ouvert \u00e0 ce que je vous transmette le rapport d'audit PDF complet cette semaine ?\n\nBien \u00e0 vous,",
+    "audit_summary": "Score 35/100 : visibilit\u00e9 critique.",
+    "created_at": "2026-09-07T11:45:27.296306+00:00"
+  }
+]

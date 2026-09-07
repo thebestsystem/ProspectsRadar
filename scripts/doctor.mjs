@@ -17,7 +17,11 @@ import { fileURLToPath } from "node:url";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const ENV_FILE = resolve(REPO_ROOT, ".env");
-const VENV_UVICORN = resolve(REPO_ROOT, "services/api/.venv/bin/uvicorn");
+const IS_WIN = process.platform === "win32";
+const VENV_UVICORN = resolve(
+  REPO_ROOT,
+  IS_WIN ? "services/api/.venv/Scripts/uvicorn.exe" : "services/api/.venv/bin/uvicorn"
+);
 
 // Required minimum versions. Bump as upstream support shifts.
 const REQUIRED_NODE_MAJOR = 20;
@@ -172,9 +176,13 @@ function checkPython() {
 
 function checkVenv() {
   if (!existsSync(VENV_UVICORN)) {
+    const venvPath = IS_WIN ? "services/api/.venv/Scripts/uvicorn.exe" : "services/api/.venv/bin/uvicorn";
+    const setupCmd = IS_WIN
+      ? "cd services/api; python -m venv .venv; .venv\\Scripts\\pip install -r requirements.txt; cd ../.."
+      : "cd services/api && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && cd ../..";
     fail(
-      "Backend virtualenv not set up (services/api/.venv/bin/uvicorn missing)",
-      "Run: `cd services/api && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && cd ../..`",
+      `Backend virtualenv not set up (${venvPath} missing)`,
+      `Run: \`${setupCmd}\``,
     );
   }
 }
@@ -203,7 +211,9 @@ function checkEnv() {
   if (!existsSync(ENV_FILE)) {
     fail(
       ".env is missing at the repo root",
-      "Run: `cp .env.example .env`, then fill in your B2 credentials",
+      IS_WIN
+        ? "Run: `copy .env.example .env`, then fill in your B2 credentials"
+        : "Run: `cp .env.example .env`, then fill in your B2 credentials",
     );
     return;
   }
@@ -296,10 +306,13 @@ async function checkPort({ port, name }) {
     isPortBoundOn(port, "::"),
   ]);
   if (v4 || v6) {
+    const inspectCmd = IS_WIN
+      ? `Get-NetTCPConnection -LocalPort ${port}`
+      : `lsof -nP -iTCP:${port} -sTCP:LISTEN`;
     warn(
       `Port ${port} (${name}) is already in use`,
       `ok — \`pnpm dev\` will pick the next free port automatically. ` +
-        `To inspect what's on it: \`lsof -nP -iTCP:${port} -sTCP:LISTEN\`.`,
+        `To inspect what's on it: \`${inspectCmd}\`.`,
     );
   }
 }

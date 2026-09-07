@@ -4,23 +4,24 @@
 ## Components
 
 - **apps/web/** — Next.js 16 frontend (App Router, Tailwind v4, shadcn/ui)
+  - ProspectsRadar dashboard: pipeline of pre-qualified leads, 5-pillar scores, modal pitch preview
+  - Interactive URL live-scan auditor
+  - Lead filtering, CSV export & PDF audit download triggers
   - Supabase auth: sign in/up, `/account`, session refresh + route protection via `proxy.ts`
-  - Route groups: `(app)` (authenticated shell) and `(auth)` (chrome-free sign-in/up)
   - Stripe billing: `/billing` plan catalog, Checkout/Portal redirects, plan-gated surfaces
-  - Dashboard with stats, upload chart, recent uploads
-  - File upload with drag-and-drop, progress tracking
-  - File browser with preview, download, delete
+  - File upload and browser components
   - Dark mode via `next-themes`
 - **services/api/** — FastAPI backend (layered architecture)
-  - REST API for file upload, listing, deletion
+  - ProspectsRadar engine: 5-pillar deterministic scoring, broken items extraction, auto-fix generation
+  - Async crawler with robots.txt AI bot directives check and llms.txt protocol detection
+  - Decision-maker enrichment (Dropcontact/Apollo adapter with fallback)
+  - Personalized cold email pitch generator
+  - In-memory CSV export & ReportLab vector PDF audit generation
   - B2 S3 integration via boto3
   - Stripe billing: checkout/portal sessions, signature-verified webhook → Supabase sync, `require_plan` gate
-  - Presigned direct browser→B2 uploads (the API signs + confirms; bytes never transit it)
-  - Health check endpoint with B2 connectivity verification
-  - Structured JSON logging with request tracing
-  - Prometheus-format metrics endpoint
+  - Health check endpoint, structured JSON logging, and metrics
 - **packages/shared/** — TypeScript type definitions
-  - Mirrors Pydantic models from the API
+  - Mirrors Pydantic models from the API (`ProspectLead`, `AuditResult`, `LeadsStats`, etc.)
   - Consumed by `apps/web/` as workspace dependency
 
 ## Backend Layering
@@ -133,12 +134,13 @@ See [docs/SECURITY.md](docs/SECURITY.md) for full security documentation.
 - Shared TypeScript types: `packages/shared/src/types.ts`
 
 ## Core Features
-
+ 
+- [ProspectsRadar Lead Engine](docs/features/prospects-radar.md)
+- [Dashboard](docs/features/dashboard.md)
 - [Authentication](docs/features/authentication.md)
 - [Billing](docs/features/billing.md)
 - [File Upload](docs/features/file-upload.md)
 - [File Browser](docs/features/file-browser.md)
-- [Dashboard](docs/features/dashboard.md)
 
 ## References
 
