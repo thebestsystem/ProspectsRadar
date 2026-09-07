@@ -105,7 +105,7 @@ def export_leads_to_csv(vertical: str | None = None) -> str:
 
 def generate_lead_audit_pdf(lead: ProspectLead) -> bytes:
     """Generate professional PDF audit report for lead pitch attachment."""
-    from pdf_generator import generate_pdf_report
+    from app.repo.pdf_generator import generate_pdf_report
 
     audit_dict = {
         "domain": lead.domain,

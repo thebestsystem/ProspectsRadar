@@ -3,7 +3,7 @@
 import pytest
 
 from app.repo.crawler import normalize_scan_url, parse_robots_txt
-from app.repo.leads_repo import export_leads_to_csv, list_leads
+from app.repo.leads_repo import export_leads_to_csv, generate_lead_audit_pdf, list_leads
 from app.repo.parser_schema import analyze_schema
 from app.service.pitch_writer import generate_cold_pitch
 from app.types.scanner import BrokenItem, DecisionMaker
@@ -90,3 +90,14 @@ def test_leads_repo_and_csv_export():
     csv_data = export_leads_to_csv()
     assert "Website,Company_Name,Vertical,AI_Score" in csv_data
     assert leads[0].domain in csv_data
+
+
+def test_generate_lead_audit_pdf():
+    """Verify generate_lead_audit_pdf produces valid PDF bytes."""
+    leads = list_leads()
+    assert len(leads) >= 1
+    pdf_bytes = generate_lead_audit_pdf(leads[0])
+    assert pdf_bytes is not None
+    assert len(pdf_bytes) > 500
+    assert pdf_bytes.startswith(b"%PDF")
+
