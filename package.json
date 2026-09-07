@@ -1,6 +1,7 @@
 {
   "name": "ai-saas-starter-kit",
   "private": true,
+  "packageManager": "pnpm@9.15.4",
   "scripts": {
     "doctor": "node scripts/doctor.mjs",
     "predev": "node scripts/doctor.mjs",
