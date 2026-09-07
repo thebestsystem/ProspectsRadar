@@ -7,6 +7,7 @@
     "dev": "node scripts/dev.mjs",
     "dev:web": "pnpm --filter @ai-saas-starter-kit/web dev",
     "dev:api": "node scripts/run-api.mjs uvicorn main:app --reload --port ${API_PORT:-8000}",
+    "start": "pnpm --filter @ai-saas-starter-kit/web start",
     "stripe:seed": "node scripts/sync-stripe-env.mjs",
     "stripe:listen": "stripe listen --forward-to localhost:${API_PORT:-8000}/billing/webhook",
     "build": "pnpm --filter @ai-saas-starter-kit/web build",
